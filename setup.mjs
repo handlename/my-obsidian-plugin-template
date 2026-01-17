@@ -74,6 +74,17 @@ async function main() {
 	execSync("npm install", { stdio: "inherit" });
 
 	console.log("\nSetup complete!");
+	console.log("\n--- Next Steps ---");
+	console.log(
+		"To enable automated releases with tagpr, configure the GH_PAT secret:",
+	);
+	console.log(
+		"  1. Create a Personal Access Token at https://github.com/settings/tokens",
+	);
+	console.log("  2. Add it as a repository secret named 'GH_PAT'");
+	console.log(
+		"     Settings > Secrets and variables > Actions > New repository secret",
+	);
 }
 
 main();
