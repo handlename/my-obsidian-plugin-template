@@ -1,6 +1,6 @@
-import { createInterface } from "readline";
-import { readFileSync, writeFileSync } from "fs";
-import { execSync } from "child_process";
+import { execSync } from "node:child_process";
+import { readFileSync, writeFileSync } from "node:fs";
+import { createInterface } from "node:readline";
 
 const rl = createInterface({
 	input: process.stdin,
@@ -58,7 +58,7 @@ async function main() {
 	} else {
 		delete manifest.fundingUrl;
 	}
-	writeFileSync(manifestPath, JSON.stringify(manifest, null, "\t") + "\n");
+	writeFileSync(manifestPath, `${JSON.stringify(manifest, null, "\t")}\n`);
 	console.log(`\nUpdated ${manifestPath}`);
 
 	// Update package.json
@@ -66,7 +66,7 @@ async function main() {
 	const pkg = JSON.parse(readFileSync(packagePath, "utf8"));
 	pkg.name = pluginId;
 	if (description) pkg.description = description;
-	writeFileSync(packagePath, JSON.stringify(pkg, null, "\t") + "\n");
+	writeFileSync(packagePath, `${JSON.stringify(pkg, null, "\t")}\n`);
 	console.log(`Updated ${packagePath}`);
 
 	// Update package-lock.json by running npm install
